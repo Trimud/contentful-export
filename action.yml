@@ -1,0 +1,17 @@
+name: 'Contentful Export'
+description: 'Remove all locales besides en-GB from Contentful exported file'
+author: 'Yuriy Boev'
+branding:
+  icon: 'file-text'
+  color: 'blue'
+inputs:
+  path:
+    description: 'The path to the file to be read.'
+    required: true
+  localesToRemove:
+    description: 'Array of locales to be removed from the file.'
+    default: '["es-ES", "de-DE", "it-IT", "nl-NL", "fr-FR", "pt-PT"]'
+    required: true
+runs:
+  using: 'node14'
+  main: 'dist/index.js'
