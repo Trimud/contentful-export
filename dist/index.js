@@ -1546,6 +1546,14 @@ exports.debug = debug; // for test
 
 /***/ }),
 
+/***/ 289:
+/***/ ((module) => {
+
+module.exports = eval("require")("contentful-export-yqiccqy-master.json");
+
+
+/***/ }),
+
 /***/ 491:
 /***/ ((module) => {
 
@@ -1698,15 +1706,14 @@ async function main() {
         const filePath = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('path', { required: true });
         const localesToRemove = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('localesToRemove', { required: true });
         const localesToRemoveJSON = JSON.parse(localesToRemove);
-        const readFile = async (fileName) => {
-            try {
-                return await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(fileName, 'utf8');
-            }
-            catch (error) {
+        // Return error if file doesn't exists
+        (0,fs__WEBPACK_IMPORTED_MODULE_0__.access)(filePath, fs__WEBPACK_IMPORTED_MODULE_0__.constants.F_OK, (error) => {
+            if (error) {
                 _actions_core__WEBPACK_IMPORTED_MODULE_1__.setFailed(error.message);
+                return null;
             }
-        };
-        const file = await readFile(filePath);
+        });
+        const file = __nccwpck_require__(289);
         function cleanData(data, deleteKeys) {
             // There is nothing to be done if `data` is not an object
             if (typeof data != 'object')
@@ -1725,7 +1732,8 @@ async function main() {
             }
         }
         cleanData(file, localesToRemoveJSON);
-        fs__WEBPACK_IMPORTED_MODULE_0__.promises.writeFile('contentful-export-yqiccqy-master.json', JSON.stringify(file));
+        // Overwrite existing file
+        (0,fs__WEBPACK_IMPORTED_MODULE_0__.writeFileSync)(filePath, JSON.stringify(file));
     }
     catch (error) {
         _actions_core__WEBPACK_IMPORTED_MODULE_1__.setFailed(error.message);

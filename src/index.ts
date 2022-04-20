@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs'
+import { access, constants, writeFileSync } from 'fs'
 import * as core from '@actions/core'
 
 main().catch((error: any) => core.setFailed(error.message))
@@ -9,15 +9,16 @@ async function main() {
     const localesToRemove = core.getInput('localesToRemove', { required: true })
     const localesToRemoveJSON = JSON.parse(localesToRemove)
 
-    const readFile = async (fileName: string) => {
-      try {
-        return await fs.readFile(fileName, 'utf8')
-      } catch (error: any) {
+    // Return error if file doesn't exists
+    access(filePath, constants.F_OK, (error: any) => {
+      if (error) {
         core.setFailed(error.message)
-      }
-    }
 
-    const file = await readFile(filePath)
+        return null
+      }
+    })
+
+    const file = require('contentful-export-yqiccqy-master.json')
 
     function cleanData(data: any, deleteKeys: string[]) {
       // There is nothing to be done if `data` is not an object
@@ -37,7 +38,8 @@ async function main() {
 
     cleanData(file, localesToRemoveJSON)
 
-    fs.writeFile('contentful-export-yqiccqy-master.json', JSON.stringify(file))
+    // Overwrite existing file
+    writeFileSync(filePath, JSON.stringify(file))
   } catch (error: any) {
     core.setFailed(error.message)
   }
