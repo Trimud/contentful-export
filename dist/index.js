@@ -1693,19 +1693,19 @@ var __webpack_exports__ = {};
 
 
 main().catch((error) => _actions_core__WEBPACK_IMPORTED_MODULE_1__.setFailed(error.message));
-const readFile = async (file) => {
-    try {
-        return await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(file, 'utf8');
-    }
-    catch (err) {
-        console.log(err);
-    }
-};
 async function main() {
     try {
         const filePath = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('path', { required: true });
         const localesToRemove = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('localesToRemove', { required: true });
         const localesToRemoveJSON = JSON.parse(localesToRemove);
+        const readFile = async (file) => {
+            try {
+                return await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(file, 'utf8');
+            }
+            catch (err) {
+                console.log(err);
+            }
+        };
         const file = readFile(filePath);
         function cleanData(data, deleteKeys) {
             // There is nothing to be done if `data` is not an object

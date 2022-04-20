@@ -3,19 +3,19 @@ import * as core from '@actions/core'
 
 main().catch((error: any) => core.setFailed(error.message))
 
-const readFile = async (file: string) => {
-  try {
-    return await fs.readFile(file, 'utf8')
-  } catch (err) {
-    console.log(err)
-  }
-}
-
 async function main() {
   try {
     const filePath = core.getInput('path', { required: true })
     const localesToRemove = core.getInput('localesToRemove', { required: true })
     const localesToRemoveJSON = JSON.parse(localesToRemove)
+
+    const readFile = async (file: string) => {
+      try {
+        return await fs.readFile(file, 'utf8')
+      } catch (err) {
+        console.log(err)
+      }
+    }
 
     const file = readFile(filePath)
 
