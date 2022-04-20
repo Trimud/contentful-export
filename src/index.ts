@@ -1,6 +1,5 @@
 import { promises as fs } from 'fs'
 import * as core from '@actions/core'
-// const core = require('@actions/core')
 
 main().catch((error: any) => core.setFailed(error.message))
 
