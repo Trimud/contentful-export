@@ -1546,14 +1546,6 @@ exports.debug = debug; // for test
 
 /***/ }),
 
-/***/ 289:
-/***/ ((module) => {
-
-module.exports = eval("require")("contentful-export-yqiccqy-master.json");
-
-
-/***/ }),
-
 /***/ 491:
 /***/ ((module) => {
 
@@ -1713,7 +1705,7 @@ async function main() {
                 return null;
             }
         });
-        const file = __nccwpck_require__(289);
+        const file = JSON.parse((0,fs__WEBPACK_IMPORTED_MODULE_0__.readFileSync)(filePath, 'utf-8'));
         function cleanData(data, deleteKeys) {
             // There is nothing to be done if `data` is not an object
             if (typeof data != 'object')

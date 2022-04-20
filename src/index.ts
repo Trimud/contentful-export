@@ -1,4 +1,4 @@
-import { access, constants, writeFileSync } from 'fs'
+import { access, constants, readFileSync, writeFileSync } from 'fs'
 import * as core from '@actions/core'
 
 main().catch((error: any) => core.setFailed(error.message))
@@ -18,7 +18,7 @@ async function main() {
       }
     })
 
-    const file = require('contentful-export-yqiccqy-master.json')
+    const file = JSON.parse(readFileSync(filePath, 'utf-8'))
 
     function cleanData(data: any, deleteKeys: string[]) {
       // There is nothing to be done if `data` is not an object
