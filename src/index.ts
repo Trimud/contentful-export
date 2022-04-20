@@ -9,11 +9,11 @@ async function main() {
     const localesToRemove = core.getInput('localesToRemove', { required: true })
     const localesToRemoveJSON = JSON.parse(localesToRemove)
 
-    const readFile = async (file: string) => {
+    const readFile = async (fileName: string) => {
       try {
-        return await fs.readFile(file, 'utf8')
-      } catch (err) {
-        console.log(err)
+        return await fs.readFile(fileName, 'utf8')
+      } catch (error: any) {
+        core.setFailed(error.message)
       }
     }
 
@@ -37,10 +37,7 @@ async function main() {
 
     cleanData(file, localesToRemoveJSON)
 
-    fs.writeFile(
-      'contentful-export-yqiccqy-master-2.json',
-      JSON.stringify(file)
-    )
+    fs.writeFile('contentful-export-yqiccqy-master.json', JSON.stringify(file))
   } catch (error: any) {
     core.setFailed(error.message)
   }

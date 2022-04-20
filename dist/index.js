@@ -1698,12 +1698,12 @@ async function main() {
         const filePath = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('path', { required: true });
         const localesToRemove = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('localesToRemove', { required: true });
         const localesToRemoveJSON = JSON.parse(localesToRemove);
-        const readFile = async (file) => {
+        const readFile = async (fileName) => {
             try {
-                return await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(file, 'utf8');
+                return await fs__WEBPACK_IMPORTED_MODULE_0__.promises.readFile(fileName, 'utf8');
             }
-            catch (err) {
-                console.log(err);
+            catch (error) {
+                _actions_core__WEBPACK_IMPORTED_MODULE_1__.setFailed(error.message);
             }
         };
         const file = readFile(filePath);
@@ -1725,7 +1725,7 @@ async function main() {
             }
         }
         cleanData(file, localesToRemoveJSON);
-        fs__WEBPACK_IMPORTED_MODULE_0__.promises.writeFile('contentful-export-yqiccqy-master-2.json', JSON.stringify(file));
+        fs__WEBPACK_IMPORTED_MODULE_0__.promises.writeFile('contentful-export-yqiccqy-master.json', JSON.stringify(file));
     }
     catch (error) {
         _actions_core__WEBPACK_IMPORTED_MODULE_1__.setFailed(error.message);
