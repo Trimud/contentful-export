@@ -13,5 +13,5 @@ inputs:
     default: '["es-ES", "de-DE", "it-IT", "nl-NL", "fr-FR", "pt-PT"]'
     required: true
 runs:
-  using: 'node14'
+  using: 'node12'
   main: 'dist/index.js'
