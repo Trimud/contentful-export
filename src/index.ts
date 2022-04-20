@@ -17,7 +17,7 @@ async function main() {
       }
     }
 
-    const file = readFile(filePath)
+    const file = await readFile(filePath)
 
     function cleanData(data: any, deleteKeys: string[]) {
       // There is nothing to be done if `data` is not an object

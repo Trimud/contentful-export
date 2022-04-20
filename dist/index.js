@@ -1706,7 +1706,7 @@ async function main() {
                 _actions_core__WEBPACK_IMPORTED_MODULE_1__.setFailed(error.message);
             }
         };
-        const file = readFile(filePath);
+        const file = await readFile(filePath);
         function cleanData(data, deleteKeys) {
             // There is nothing to be done if `data` is not an object
             if (typeof data != 'object')
